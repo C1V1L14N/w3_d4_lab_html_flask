@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h1>Best Events Site</h1>
+
+        <form action="/add-event" method="post">
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date">
+            <label for="event_name">Event Name</label>
+            <input type="text" name="event_name" id="event_name">
+            <label for="num_of_guests">Number of Guests</label>
+            <input type="number" name="num_of_guests" id="num_of_guests">
+            <label for="room_loc">Room Location</label>
+            <select name="room_loc" id="room_loc">
+                <option value="Wee Room">Wee Room</option>
+                <option value="Ballroom">Ballroom</option>
+                <option value="Function Suit">Function Suit</option>
+            </select>
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="2"></textarea>
+            <label for="recurring">Recurring Event</label>
+            <input type="checkbox" id="recurring" name="recurring" value="Recurring">
+            <!-- <label for="recurring">Recurring</label>
+            <input type="text" name="recurring" id="recurring"> -->
+            <input type="submit" value="Add Event">
+        </form>
+
+        <h2>Event Planner</h2>
+        {% for event in events %}
+        <div>
+            <p>
+                {{event.date}}: <b>{{event.event_name}}</b>, {{event.num_of_guests}}, {{event.room_loc}}, {{event.description}}
+                {% if event.recurring %}
+                <span> U+221E </span>
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+{% endblock %}
